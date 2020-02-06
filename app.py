@@ -9,8 +9,9 @@ from dtime import is_leap_year, ymd
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Project_2_db"
-
 mongo = PyMongo(app)
+
+# This is where we put functions to filter and sort
 fires_2004 = mongo.db.fires.find({"FIRE_YEAR": 2004})
 dates_2004 = []
 for v in fires_2004:
@@ -22,9 +23,14 @@ for v in fires_2004:
 # Define Flask Routes
 @app.route("/")
 def home_page():
-    
-    return render_template("index.html",
+    return render_template("index.html")
+
+@app.route("/table")
+def table_page():
+    return render_template("table.html",
         dates_2004=dates_2004)
+
+
 
 
 
