@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>National Wildfires Visualized</title>
+
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">Cover</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="/">Home / Map</a>
+                    <a class="nav-link" href="graph">Graph</a>
+                    <a class="nav-link" href="table">Table</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">
+                <table class="centered thick-border">
+                    <tr>
+                        <th>Fire Date</th>
+                    </tr>
+                    {% for d in dates_2004 %}
+                    <tr>
+                        <td>{{ d }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </p>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
