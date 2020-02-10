@@ -9,12 +9,10 @@
                 <td>{{ v }}</td>
             </tr>
             {% endfor %}
-            {% for k,v in data.years.state0.items() %}
             <tr>
                 <th class="text-left">Total: </th>
-                <td>{{ v }}</td>
+                <td>{{ data.total.state0 }}</td>
             </tr>
-            {% endfor %}
         </table>
     </div>
     <div class="col-3">
@@ -26,12 +24,10 @@
                 <td>{{ v }}</td>
             </tr>
             {% endfor %}
-            {% for k,v in data.years.state1.items() %}
             <tr>
                 <th class="text-left">Total: </th>
-                <td>{{ v }}</td>
+                <td>{{ data.total.state1 }}</td>
             </tr>
-            {% endfor %}
         </table>
     </div>
 </div>
