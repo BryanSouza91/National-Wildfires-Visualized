@@ -15,26 +15,28 @@
         <header class="masthead mb-auto">
             <div class="inner">
                 <h3 class="masthead-brand">National Wildfires Visualized</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="/">Home / Map</a>
-                    <a class="nav-link" href="graph">Graph</a>
-                    <a class="nav-link" href="table">Table</a>
-                </nav>
             </div>
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">
-                
-            </h1>
-            <p class="lead">
-                
+            <div>
+                <form name="states" action="{{ url_for('home_page') }}" method="POST">
+                    <select name="state0">
+                        {% for state0 in data.states %}
+                        <option value="{{ state0 }}" SELECTED>{{ state0 }}</option>"
+                        {% endfor %}
+                    </select>
+                    <select name="state1">
+                        {% for state1 in data.states %}
+                        <option value="{{ state1 }}" SELECTED>{{ state1 }}</option>"
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-lg btn-secondary">Select State</button>
+                </form>
+            </div>
+            <div class="container-fluid">{% block table %}{% endblock %}
+            </div>
 
-            </p>
-            <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary">Show Map</a>
-                <!-- Hide map on page load, Show map on button click -->
-            </p>
         </main>
 
         <footer class="mastfoot mt-auto">

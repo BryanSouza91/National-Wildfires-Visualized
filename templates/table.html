@@ -1,65 +1,26 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>National Wildfires Visualized</title>
-
-    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
-</head>
-
-<body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
-            <div class="inner">
-                <h3 class="masthead-brand">Cover</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="/">Home / Map</a>
-                    <a class="nav-link" href="graph">Graph</a>
-                    <a class="nav-link" href="table">Table</a>
-                </nav>
-            </div>
-        </header>
-
-        <main role="main" class="inner cover">
-            <div class="row">
-                <div class="lead col-3">
-                    <h4 class="cover-heading">State: {{ data.state[0] }}</h4>
-                    <table class="table table-sm table-primary">
-                        {% for k,v in data.causes.state0.items() %}
-                        <tr>
-                            <th>{{ k }}</th>
-                        </tr>
-                        <tr>
-                            <td>{{ v }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-                <div class="lead col-3">
-                    <h4 class="cover-heading">State: {{ data.state[1] }}</h4>
-                    <table class="table table-sm table-primary">
-                        {% for k,v in data.causes.state1.items() %}
-                        <tr>
-                            <th>{{ k }}</th>
-                        </tr>
-                        <tr>
-                            <td>{{ v }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            </div>
-        </main>
-
-        <footer class="mastfoot mt-auto">
-            <div class="inner">
-
-            </div>
-        </footer>
+{% extends "index.html" %}{% block table %}
+<div class="row">
+    <div class="lead col-3">
+        <h4 class="cover-heading">State: {{ data.state[0] }}</h4>
+        <table class="table table-sm table-primary">
+            {% for k,v in data.causes.state0.items() %}
+            <tr>
+                <th>{{ k }}</th>
+                <td>{{ v }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-</body>
-
-</html>
+    <div class="lead col-3">
+        <h4 class="cover-heading">State: {{ data.state[1] }}</h4>
+        <table class="table table-sm table-primary">
+            {% for k,v in data.causes.state1.items() %}
+            <tr>
+                <th>{{ k }}</th>
+                <td>{{ v }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
