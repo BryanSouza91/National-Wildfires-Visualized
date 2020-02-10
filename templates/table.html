@@ -24,20 +24,34 @@
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">
-                <table class="centered thick-border">
-                    <tr>
-                        <th>Fire Date</th>
-                    </tr>
-                    {% for d in dates_2004 %}
-                    <tr>
-                        <td>{{ d }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-
-            </p>
+            <div class="row">
+                <div class="lead col-3">
+                    <h4 class="cover-heading">State: {{ data.state[0] }}</h4>
+                    <table class="table table-sm table-primary">
+                        {% for k,v in data.causes.state0.items() %}
+                        <tr>
+                            <th>{{ k }}</th>
+                        </tr>
+                        <tr>
+                            <td>{{ v }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="lead col-3">
+                    <h4 class="cover-heading">State: {{ data.state[1] }}</h4>
+                    <table class="table table-sm table-primary">
+                        {% for k,v in data.causes.state1.items() %}
+                        <tr>
+                            <th>{{ k }}</th>
+                        </tr>
+                        <tr>
+                            <td>{{ v }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         </main>
 
         <footer class="mastfoot mt-auto">
