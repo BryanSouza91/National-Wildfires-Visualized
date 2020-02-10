@@ -27,14 +27,18 @@ def home_page():
         state_list = [state for state in states.STATE.unique()]
         state0 = request.form.get('state0')
         state1 = request.form.get('state1')
-        df0 = pd.DataFrame.from_records(mongo.db.fires.find({"STATE": state0 },{"STAT_CAUSE_DESCR": 1}))
-        df1 = pd.DataFrame.from_records(mongo.db.fires.find({"STATE": state1 },{"STAT_CAUSE_DESCR": 1}))
+        df0 = pd.DataFrame.from_records(mongo.db.fires.find({"STATE": state0 },{"STAT_CAUSE_DESCR": 1, "STATE": 1}))
+        df1 = pd.DataFrame.from_records(mongo.db.fires.find({"STATE": state1 },{"STAT_CAUSE_DESCR": 1, "STATE": 1}))
         return render_template("table.html", data={
                                                 "states": state_list,
                                                 "state": (state0,state1),
                                                 "causes": {
                                                     "state0": df0.STAT_CAUSE_DESCR.value_counts(),
                                                     "state1": df1.STAT_CAUSE_DESCR.value_counts()
+                                                    },
+                                                "years": {
+                                                    "state0": df0.STATE.value_counts(),
+                                                    "state1": df1.STATE.value_counts()
                                                     }
                                                 })
 

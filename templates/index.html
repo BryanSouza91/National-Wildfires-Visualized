@@ -19,19 +19,19 @@
         </header>
 
         <main role="main" class="inner cover">
-            <div>
+            <div class="form-group col-2">
                 <form name="states" action="{{ url_for('home_page') }}" method="POST">
-                    <select name="state0">
+                    <select name="state0" class="form-control">
                         {% for state0 in data.states %}
                         <option value="{{ state0 }}" SELECTED>{{ state0 }}</option>"
                         {% endfor %}
                     </select>
-                    <select name="state1">
+                    <select name="state1" class="form-control">
                         {% for state1 in data.states %}
                         <option value="{{ state1 }}" SELECTED>{{ state1 }}</option>"
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-lg btn-secondary">Select State</button>
+                    <button type="submit" class="btn btn-lg btn-primary my-2">Select State</button>
                 </form>
             </div>
             <div class="container-fluid">{% block table %}{% endblock %}
