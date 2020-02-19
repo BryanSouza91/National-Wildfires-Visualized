@@ -11,40 +11,48 @@
 </head>
 
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
-            <div class="inner">
-                <h3 class="masthead-brand">National Wildfires Visualized</h3>
-            </div>
-        </header>
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">National Wildfires Visualized</h3>
+        </div>
+    </header>
 
-        <main role="main" class="inner cover">
-            <div class="form-group col-2">
-                <form name="states" action="{{ url_for('home_page') }}" method="POST">
-                    <select name="state0" class="form-control">
-                        {% for state0 in data.states %}
-                        <option value="{{ state0 }}" SELECTED>{{ state0 }}</option>"
-                        {% endfor %}
-                    </select>
-                    <select name="state1" class="form-control">
-                        {% for state1 in data.states %}
-                        <option value="{{ state1 }}" SELECTED>{{ state1 }}</option>"
-                        {% endfor %}
-                    </select>
-                    <button type="submit" class="btn btn-lg btn-primary my-2">Select State</button>
-                </form>
+    <main role="main" class="vertical-center">
+        <div class="form-group col-3 mx-auto my-1">
+            <div id="form" class="form-group row">
+                <select id="state0_sel" name="state0" class="form-control">
+                    {% for state0 in data.states %}
+                    <option value="{{ state0 }}">{{ state0 }}</option>"
+                    {% endfor %}
+                    <option value="" disabled selected>Choose the State...</option>
+                </select>
             </div>
-            <div class="container-fluid">{% block table %}{% endblock %}
+        </div>
+        <div class="container-fluid">
+            <div class="card bg-white border-primary shadow-lg mx-auto col-11 my-1">
+                <div class="row">
+                    <div id="streamGraph" class="mx-auto col-11 my-1"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div id="pieChart" class="col-5 mx-auto my-1"></div>
+                    <div id="barChart" class="col-5 mx-auto my-1"></div>
+                </div>
             </div>
-
-        </main>
-
-        <footer class="mastfoot mt-auto">
-            <div class="inner">
-
-            </div>
-        </footer>
-    </div>
+        </div>
+    </main>
+    <footer class="mastfoot mt-auto">
+        <div class="inner text-shadow">
+            <p>&copy;2020 ABC Data Corp. All Rights Reserved</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+    <script src="https://code.highcharts.com/modules/streamgraph.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="{{ url_for('static',filename='js/test.js') }}"></script>
 </body>
 
 </html>
