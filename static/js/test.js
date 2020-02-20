@@ -47,6 +47,18 @@ form.addEventListener('change', function () {
       credits: {
         enabled: false
       },
+      plotOptions: {
+          series: {
+              borderRadius: 4,
+              dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.0f}'
+              }
+          }
+      },
+      legend: {
+        enabled: false,
+      },
       xAxis: {
         categories: data.column.counts.map(x => x[0])
       },
@@ -93,7 +105,7 @@ form.addEventListener('change', function () {
       title: {
         floating: false,
         align: 'left',
-        text: `Area Burnt by Cause per Year in ${st0}`
+        text: `Area Burned by Cause per Year in ${st0}`
       },
 
       credits: {
