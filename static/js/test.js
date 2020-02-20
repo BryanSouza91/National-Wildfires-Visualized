@@ -12,6 +12,8 @@ form.addEventListener('change', function () {
   let D = JSON.parse(xmlHttp.responseText);
   // console.log(D);
 
+
+
   function buildPieChart(data, st0) {
     Highcharts.chart('pieChart', {
       chart: {
@@ -48,13 +50,13 @@ form.addEventListener('change', function () {
         enabled: false
       },
       plotOptions: {
-          series: {
-              borderRadius: 4,
-              dataLabels: {
-                  enabled: true,
-                  format: '{point.y:.0f}'
-              }
+        series: {
+          borderRadius: 4,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.0f}'
           }
+        }
       },
       legend: {
         enabled: false,
@@ -144,6 +146,96 @@ form.addEventListener('change', function () {
   };
 
 
+  // console.log(D.column.sizes.map(x => x.data.size_data.reduce((a, b) => a + b, 0)))
+  // console.log(D.column.sizes.map(x => x.cause))
+
+  function buildColumnChart(data) {
+    let contColSeries = [];
+    data.column.days_to_cont.map(x => contColSeries.push({
+      name: x.cause,
+      y: x.data.cont_data.reduce((a, b) => a + b, 0),
+      drilldown: x.cause
+    }));
+    // console.log(contColSeries);
+
+    // let sizeColSeries = [];
+    // data.column.sizes.map(x => sizeColSeries.push({
+    //   name: x.cause,
+    //   y: x.data.size_data.reduce((a, b) => a + b, 0),
+    //   drilldown: x.cause
+    // }));
+    // console.log(sizeColSeries);
+
+
+    let drilldownContSeries = [];
+    data.column.days_to_cont.map(x => drilldownContSeries.push({
+      name: x.cause,
+      id: x.cause,
+      data: x.data.drilldown
+    }));
+    // console.log(drilldownContSeries);
+
+    // Create the chart
+    Highcharts.chart('columnChart', {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Days from Discovery to Containment and Area Burned'
+      },
+      xAxis: {
+        type: 'category'
+      },
+      yAxis: {
+        title: "Days"
+      },
+      // {
+      //   opposite: true,
+      //   title: "Area Burned"
+      // }],
+      credits: {
+        enabled: false
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.0f}'
+          }
+        }
+      },
+
+      // tooltip: {
+      //   headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      //   pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> days fighting fire<br/>'
+      // },
+
+      series: [
+        {
+          name: "Days to Contain",
+          colorByPoint: true,
+          data: contColSeries
+        }
+        // , {
+        //   name: "Total Area Burned",
+        //   colorByPoint: true,
+        //   data: sizeColSeries
+        // }
+      ],
+      drilldown: {
+        series: drilldownContSeries
+      }
+    });
+
+
+
+  };
+
+  buildColumnChart(D);
   buildPieChart(D, st0);
   buildBarChart(D, st0);
   buildStreamGraph(D, st0);

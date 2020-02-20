@@ -68,11 +68,13 @@ def get_data(state0):
     for index, group in cont_pivot.iterrows():
         years = [str(index_) for index_, item in group.iteritems()]
         nums = [item for index_, item in group.iteritems()]
+        data = [[str(index_),item] for index_,item in group.iteritems()]
         each_cause = {
             "cause": index,
             "data": {
                 "years": years,
-                "cont_data": nums}
+                "cont_data": nums,
+                "drilldown": data}
         }
         cont_list.append(each_cause)
     size_list = []
