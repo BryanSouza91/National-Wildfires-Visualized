@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 def home_page():
     if request.method == "GET":
         states_df = pd.DataFrame.from_records(
-            mongo.db.fires.find({"FIRE_SIZE": {"$gte": 1000}}, {"STATE": 1}).limit(10000))
+            mongo.db.fires.find({"FIRE_SIZE": { "$gte": 1000 }}, {"STATE": 1}).limit(10000))
         state_list = []
         state_list = [state for state in states_df.STATE.sort_values(
             ascending=True).unique()]
@@ -28,7 +28,7 @@ def get_data(state0):
 
     # pulls in data based on api state variable
     df0 = pd.DataFrame.from_records(mongo.db.fires.find(
-        {"STATE": state0, "FIRE_SIZE": {"$gte": 1000}}, {"STAT_CAUSE_DESCR": 1, 'FIRE_SIZE': 1, 'FIRE_YEAR': 1, 'DAYS_TO_CONT': 1}))   # {"$gte": 10 }
+        {"STATE": state0, "FIRE_SIZE": { "$gte": 1000 }}, {"STAT_CAUSE_DESCR": 1, 'FIRE_SIZE': 1, 'FIRE_YEAR': 1, 'DAYS_TO_CONT': 1}))   # {"$gte": 10 }
 
     # build pivot table for fire size
     cause_size_pivot = pd.pivot_table(df0, values='FIRE_SIZE', index=['FIRE_YEAR'],

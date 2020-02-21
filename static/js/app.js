@@ -78,7 +78,6 @@ form.addEventListener('change', function () {
   };
 
   function buildStreamGraph(data, st0) {
-    var colors = Highcharts.getOptions().colors;
     Highcharts.chart('streamGraph', {
 
       chart: {
@@ -86,23 +85,6 @@ form.addEventListener('change', function () {
         marginBottom: 30,
         zoomType: 'x'
       },
-
-      // Make sure connected countries have similar colors
-      colors: [
-        colors[0],
-        colors[1],
-        colors[2],
-        colors[3],
-        colors[4],
-        colors[5],
-        colors[6],
-        colors[7],
-        colors[8],
-        colors[9],
-        colors[0],
-        Highcharts.color(colors[4]).brighten(0.2).get(),
-        Highcharts.color(colors[7]).brighten(0.).get(),
-      ],
 
       title: {
         floating: false,
@@ -118,7 +100,7 @@ form.addEventListener('change', function () {
         maxPadding: 0,
         type: 'category',
         crosshair: true,
-        categories: data.streamGraph.years_categories.map(x => x),
+        categories: data.streamGraph.years_categories,
         labels: {
           align: 'left',
           reserveSpace: true,
@@ -185,6 +167,11 @@ form.addEventListener('change', function () {
       },
       xAxis: {
         type: 'category'
+        labels: {
+          align: 'left',
+          reserveSpace: true,
+          rotation: 315,
+        }
       },
       yAxis: {
         title: "Days"
@@ -201,6 +188,7 @@ form.addEventListener('change', function () {
       },
       plotOptions: {
         series: {
+          borderRadius: 4,
           borderWidth: 0,
           dataLabels: {
             enabled: true,
