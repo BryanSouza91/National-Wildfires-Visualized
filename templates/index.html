@@ -11,38 +11,51 @@
 </head>
 
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
-            <div class="inner">
-                <h3 class="masthead-brand">National Wildfires Visualized</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="/">Home / Map</a>
-                    <a class="nav-link" href="graph">Graph</a>
-                    <a class="nav-link" href="table">Table</a>
-                </nav>
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">National Wildfires Visualized</h3>
+        </div>
+    </header>
+
+    <main role="main" class="vertical-center">
+        <div class="form-group col-3 mx-auto my-1">
+            <div id="form" class="form-group row">
+                <select id="state0_sel" name="state0" class="form-control">
+                    {% for state0 in data.states %}
+                    <option value="{{ state0 }}">{{ state0 }}</option>"
+                    {% endfor %}
+                    <option value="" disabled selected>Choose the State...</option>
+                </select>
             </div>
-        </header>
-
-        <main role="main" class="inner cover">
-            <h1 class="cover-heading">
-                
-            </h1>
-            <p class="lead">
-                
-
-            </p>
-            <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary">Show Map</a>
-                <!-- Hide map on page load, Show map on button click -->
-            </p>
-        </main>
-
-        <footer class="mastfoot mt-auto">
-            <div class="inner">
-
+        </div>
+        <div class="container-fluid">
+            <div class="card bg-white border-primary shadow-lg mx-auto col-12 my-4">
+                <div class="row justify-content-center">
+                    <div id="pieChart" class="col-6 mx-auto my-1"></div>
+                    <div id="barChart" class="col-6 mx-auto my-1"></div>
+                </div>
+                <div class="row">
+                    <div id="streamGraph" class="mx-auto col-12 my-1"></div>
+                </div>
+                <div class="row">
+                    <div id="columnChart" class="mx-auto col-12 my-1"></div>
+                </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </main>
+    <footer class="mastfoot mt-auto">
+        <div class="inner text-shadow">
+            <p>&copy;2020 ABC Data Corp. All Rights Reserved</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+    <script src="https://code.highcharts.com/modules/streamgraph.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="{{ url_for('static',filename='js/app.js') }}"></script>
 </body>
 
 </html>

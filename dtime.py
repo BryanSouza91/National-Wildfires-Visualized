@@ -13,6 +13,8 @@ def ymd(Y,N):
     else:
         K = 2
     M = int((9 * (K + N)) / 275.0 + 0.98)
+    if M > 12:   # added this 
+        M -= 12
     if N < 32:
         M = 1
     D = N - int((275 * M) / 9.0) + K * int((M + 9) / 12.0) + 30
