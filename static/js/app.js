@@ -22,6 +22,9 @@ form.addEventListener('change', function () {
       title: {
         text: `Number of Fires and Area Burned by Cause in ${st0}`
       },
+      subtitle: {
+        text: `Radius is scaled by number of fires and slice(percent of total) is scaled by area burned.`
+      },
       credits: {
         enabled: false
       },
@@ -67,11 +70,11 @@ form.addEventListener('change', function () {
       yAxis: [{
         min: 0,
         title: {
-          text: 'Counts of Fires'
+          text: 'Number of Fires'
         }
       }],
       series: [{
-        name: 'Counts of Fires',
+        name: 'Number of Fires',
         data: data.column.counts
       }]
     });
@@ -127,7 +130,6 @@ form.addEventListener('change', function () {
     });
   };
 
-
   // console.log(D.column.sizes.map(x => x.data.size_data.reduce((a, b) => a + b, 0)))
   // console.log(D.column.sizes.map(x => x.cause))
 
@@ -163,7 +165,7 @@ form.addEventListener('change', function () {
         type: 'column'
       },
       title: {
-        text: 'Days from Discovery to Containment and Area Burned'
+        text: 'Days from Discovery to Containment'
       },
       xAxis: {
         type: 'category'
