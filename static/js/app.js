@@ -169,11 +169,6 @@ form.addEventListener('change', function () {
       },
       xAxis: {
         type: 'category'
-        labels: {
-          align: 'left',
-          reserveSpace: true,
-          rotation: 315,
-        }
       },
       yAxis: {
         title: "Days"
