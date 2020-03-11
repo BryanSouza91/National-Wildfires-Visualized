@@ -1,16 +1,25 @@
-
 let form = document.getElementById('form');
 
 form.addEventListener('change', function () {
   let st0_sel = document.getElementById("state0_sel");
   let st0 = st0_sel.options[st0_sel.selectedIndex].value;
 
-  let xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", `/api/${st0}`, false); // false for synchronous request  
-  xmlHttp.send(null);
-  // console.log(JSON.parse(xmlHttp.responseText));
-  let D = JSON.parse(xmlHttp.responseText);
-  // console.log(D);
+
+  fetch(`/api/${st0}`)
+    .then(async (response) => {
+      const D = await response.json();
+      // console.log(D);
+      buildColumnChart(D);
+      buildPieChart(D, st0);
+      buildBarChart(D, st0);
+      buildStreamGraph(D, st0);
+    });
+  // let xmlHttp = new XMLHttpRequest();
+  // xmlHttp.open("GET", `/api/${st0}`, true); // false for synchronous request  
+  // xmlHttp.send(null);
+  // // console.log(JSON.parse(xmlHttp.responseText));
+  // let D = JSON.parse(xmlHttp.responseText);
+  // // console.log(D);
 
 
 
@@ -141,7 +150,6 @@ form.addEventListener('change', function () {
       drilldown: x.cause
     }));
     // console.log(contColSeries);
-
     // let sizeColSeries = [];
     // data.column.sizes.map(x => sizeColSeries.push({
     //   name: x.cause,
@@ -149,8 +157,6 @@ form.addEventListener('change', function () {
     //   drilldown: x.cause
     // }));
     // console.log(sizeColSeries);
-
-
     let drilldownContSeries = [];
     data.column.days_to_cont.map(x => drilldownContSeries.push({
       name: x.cause,
@@ -215,14 +221,5 @@ form.addEventListener('change', function () {
         series: drilldownContSeries
       }
     });
-
-
-
   };
-
-  buildColumnChart(D);
-  buildPieChart(D, st0);
-  buildBarChart(D, st0);
-  buildStreamGraph(D, st0);
-
 });
