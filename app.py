@@ -3,7 +3,6 @@ import pandas as pd
 import os
 from flask import Flask, render_template, request
 from flask_pymongo import PyMongo
-import json
 
 # Setup Flask
 app = Flask(__name__)
@@ -15,7 +14,7 @@ mongo = PyMongo(app)
 def home_page():
     if request.method == "GET":
         states_df = pd.DataFrame.from_records(
-            mongo.db.fires.find({},{"STATE": 1}).limit(100000))
+            mongo.db.fires.find({}, {"STATE": 1}).limit(1000000))
         state_list = []
         state_list = [state for state in states_df.STATE.sort_values(
             ascending=True).unique()]
@@ -68,7 +67,7 @@ def get_data(state0):
     for index, group in cont_pivot.iterrows():
         years = [str(index_) for index_, item in group.iteritems()]
         nums = [item for index_, item in group.iteritems()]
-        data = [[str(index_),item] for index_,item in group.iteritems()]
+        data = [[str(index_), item] for index_, item in group.iteritems()]
         each_cause = {
             "cause": index,
             "data": {
@@ -98,8 +97,7 @@ def get_data(state0):
         "v_pie": vpie_data,
         "streamGraph": {
             "data": streamgraph_data,
-            "years_categories": years_categories},
-
+            "years_categories": years_categories}
     }
     return data
 
